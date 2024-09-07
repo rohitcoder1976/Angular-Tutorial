@@ -17,3 +17,5 @@ export class MasterComponent {
     this.currentComponent = newComponent;
   }
 }
+
+// https://freeapi.miniprojectideas.com/api/ClientStrive/GetAllRoles

@@ -1,2 +1,20 @@
-<h1>First Angular App</h1>
-<app-master></app-master>
+<nav class="navbar navbar-inverse testnav" style="margin-top:16px;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javascript:void(0);">Employee Management</a>
+        </div>
+        <ul class="nav navbar-nav" style="visibility: visible;">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/employee">Employee</a></li>
+            <li><a href="/client">Client</a></li>
+        </ul>
+        <div class="navbar-form navbar-left">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="button" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>

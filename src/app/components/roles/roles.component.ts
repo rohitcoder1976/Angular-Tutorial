@@ -1,28 +1,29 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IRole } from '../../model/class/interface/role';
+import { CommonModule } from '@angular/common';
+import { IApiResponseModel } from '../../model/class/interface/apiResponse';
 
 @Component({
   selector: 'app-roles',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.scss'
 })
-export class RolesComponent {
-  firstName: string = "Angular Tutorial";
-  angularVersion: string = "Version 18";
+export class RolesComponent implements OnInit {
+  roleList: IRole[] = [];
+  http = inject(HttpClient);
+  url: string = "https://freeapi.miniprojectideas.com/api/ClientStrive/GetAllRoles";
 
-  version: number = 18;
-  isActive: boolean = true;
-  currentDate: Date = new Date();
-  inputType: string = "radio";
-  selectedState: string = "MH";
-
-  showWelcomeAlert() {
-    alert("Welcome to Employee App!");
+  ngOnInit(): void {
+    this.getAllRoles();
   }
 
-  showMessage(message: string) {
-    alert("Message: " + message);
+  getAllRoles() {
+    this.http.get<IApiResponseModel>(this.url).subscribe((res: IApiResponseModel) => {
+      this.roleList = res.data;
+    });
   }
 }
