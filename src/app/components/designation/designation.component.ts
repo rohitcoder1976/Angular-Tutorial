@@ -15,12 +15,16 @@ import { CommonModule } from '@angular/common';
 export class DesignationComponent implements OnInit {
   designationList: IDesignation[] = [];
   masterService = inject(MasterService);
+  isLoading: boolean = true;
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.masterService.getDesignations().subscribe((result: IApiResponseModel) => {
       this.designationList = result.data;
+      this.isLoading = false;
     }, error => {
       alert("API error");
+      this.isLoading = false;
     });
   }
 }

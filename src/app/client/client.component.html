@@ -1,1 +1,102 @@
-<p>client works!</p>
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-warning">
+                Client List
+            </div>
+            @if (this.isLoading){
+            <div class="col-12">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            } @else {
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Company Name</th>
+                            <th>Client Name</th>
+                            <th>Contact Number</th>
+                            <th>City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of clientList; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{item.companyName}}</td>
+                            <td>{{item.contactPersonName}}</td>
+                            <td>{{item.contactNo}}</td>
+                            <td>{{item.city}}</td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            }
+
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header bg-warning">
+                New Client
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Name</label>
+                        <input [(ngModel)]="clientObj.contactPersonName" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">Company Name</label>
+                        <input [(ngModel)]="clientObj.companyName" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">Contact Number</label>
+                        <input [(ngModel)]="clientObj.contactNo" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">City</label>
+                        <input [(ngModel)]="clientObj.city" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">State</label>
+                        <input [(ngModel)]="clientObj.state" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">Pincode</label>
+                        <input [(ngModel)]="clientObj.pincode" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">Address</label>
+                        <textarea [(ngModel)]="clientObj.address" class="form-control"></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label for="">Employee Strength</label>
+                        <input [(ngModel)]="clientObj.employeeStrength" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">GST Number</label>
+                        <input [(ngModel)]="clientObj.gstNo" type="text" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="">Registration Number</label>
+                        <input [(ngModel)]="clientObj.regNo" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-secondary">Reset</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button class="btn btn-success" (click)="saveClient()">Save Client</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

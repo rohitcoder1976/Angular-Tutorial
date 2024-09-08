@@ -10,8 +10,11 @@ export class MasterService {
   constructor(private http: HttpClient) {
 
   }
-
   getDesignations(): Observable<IApiResponseModel> {
     return this.http.get<IApiResponseModel>("https://freeapi.miniprojectideas.com/api/ClientStrive/GetAllDesignation");
+  }
+
+  getClient(): Observable<IApiResponseModel> {
+    return this.http.get<IApiResponseModel>("https://freeapi.miniprojectideas.com/api/ClientStrive/GetAllClients");
   }
 }
