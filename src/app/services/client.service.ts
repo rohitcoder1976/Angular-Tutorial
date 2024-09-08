@@ -18,11 +18,23 @@ export class ClientService {
     return this.http.get<IApiResponseModel>(environment.API_URL + "/GetAllClients");
   }
 
+  getAllEmployee(): Observable<IApiResponseModel> {
+    return this.http.get<IApiResponseModel>(environment.API_URL + "/GetAllEmployee");
+  }
+
+  getAllProject(): Observable<IApiResponseModel> {
+    return this.http.get<IApiResponseModel>(environment.API_URL + "/GetAllProjectsEmployees");
+  }
+
   addUpdate(obj: Client): Observable<IApiResponseModel> {
     return this.http.post<IApiResponseModel>(environment.API_URL + "/AddUpdateClient", obj);
   }
 
   deleteClientById(id: number): Observable<Client> {
     return this.http.get<Client>(environment.API_URL + "/DeleteClientByClientId?clientId=" + id);
+  }
+
+  addUpdateClientProject(obj: Object): Observable<IApiResponseModel> {
+    return this.http.post<IApiResponseModel>(environment.API_URL + "/AddUpdateClientProject", obj);
   }
 }

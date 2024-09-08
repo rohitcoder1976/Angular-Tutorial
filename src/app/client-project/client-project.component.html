@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-warning">
+                Client List
+            </div>
+            @if (this.isLoading){
+            <div class="col-12">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            } @else {
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Project Name</th>
+                            <th>Client Name</th>
+                            <th>Lead Employee</th>
+                            <th>Start Date</th>
+                        </tr>
+                    </thead>
+
+                    @for (projectItem of projectList; track $index) {
+                    <tr>
+                        <td>{{$index+1}}</td>
+                        <td>{{projectItem.projectName}}</td>
+                        <td>{{projectItem.clientName}}</td>
+                        <td>{{projectItem.empName}}</td>
+                        <td>{{projectItem.startDate | date}}</td>
+                    </tr>
+                    }
+                </table>
+            </div>
+            }
+
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header bg-warning">
+                New Client
+            </div>
+            <div class="card-body">
+                <form [formGroup]="projectForm">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="">Project Name</label>
+                            <input required type="text" formControlName="projectName" class="form-control" />
+
+                            @if (projectForm.controls["projectName"].touched){
+                            <div class="text-danger">
+                                @if (projectForm.controls["projectName"].errors?.["required"]){
+                                <span>This Is Required</span>
+                                } @else if (projectForm.controls["projectName"].errors?.["minlength"]) {
+                                <span>Minimum of 4 characters</span>
+                                }
+                            </div>
+                            }
+
+                        </div>
+                        <div class="col-6">
+                            <label for="">Start Date</label>
+                            <input type="date" formControlName="startDate" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <label for="">Expected End Date</label>
+                            <input type="date" formControlName="expectedEndDate" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <label for="">Contact Name</label>
+                            <input type="text" formControlName="contactPerson" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <label for="">Contact Mobile</label>
+                            <input type="text" formControlName="contactPersonContactNo" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <label for="">Contact Email</label>
+                            <input type="text" formControlName="contactPersonEmailId" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <label for="">Total Employees</label>
+                            <input type="text" formControlName="totalEmpWorking" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <label for="">Project Cost</label>
+                            <input type="text" formControlName="projectCost" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <label for="">Project Description</label>
+                            <textarea formControlName="projectDetails" class="form-control"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <label for="">Client</label>
+                            <select formControlName="clientId" class="form-control">
+                                <option value="">Select Client</option>
+                                @for (clientItem of clientList; track $index) {
+                                <option [value]="clientItem.clientId">{{clientItem.companyName}} -
+                                    {{clientItem.contactPersonName}}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="">Lead By</label>
+                            <select formControlName="leadByEmpId" class="form-control">
+                                <option value="">Select Employee</option>
+                                @for (employeeItem of employeeList; track $index){
+                                <option [value]="employeeItem.empId">{{employeeItem.empName}} - {{employeeItem.empCode}}
+                                </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-secondary" (click)="resetForm()">Reset</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button class="btn btn-success" [disabled]="projectForm.invalid" (click)="saveProject()">Save
+                            Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

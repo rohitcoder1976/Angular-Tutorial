@@ -1,18 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { IApiResponseModel } from '../model/class/interface/apiResponse';
-import { IClient } from '../model/class/interface/client';
 import { Client } from '../model/class/classes/Client';
 import { FormsModule } from '@angular/forms';
 import { ClientService } from '../services/client.service';
+import { CommonModule, DatePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-client',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, UpperCasePipe, DatePipe],
   templateUrl: './client.component.html',
   styleUrl: './client.component.scss'
 })
 export class ClientComponent implements OnInit {
+
+  currentDate: Date = new Date();
 
   clientService = inject(ClientService);
   clientObj: Client = new Client();
